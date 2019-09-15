@@ -72,11 +72,14 @@ namespace SeleniunTests
             var submitButton = driver.FindElement(By.XPath(@"//*[@id=""SubmitCreate""]/span"));
             submitButton.Click();
 
+           WebDriverWait wait = new WebDriverWait(driver, System.TimeSpan.FromSeconds(10));
+            wait.Until(w => w.FindElement(By.Id("email")).GetAttribute("value") != string.Empty);
+            
             //*[@id="email"]          
             var registeredEmail = driver.FindElement(By.Id(@"email"));
-           
+            var email = registeredEmail.GetAttribute("value");
 
-            Assert.AreEqual(userNameInput.Text, registeredEmail.Text);
+            Assert.AreEqual("ivailo13@abv.bg", email);
 
             driver.Quit();
         }
